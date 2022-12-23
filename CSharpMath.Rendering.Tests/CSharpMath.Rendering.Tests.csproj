@@ -3,6 +3,21 @@
     <Compile Include="..\CSharpMath.CoreTests\_Helpers\ApproximateAssertions.cs" Link="ApproximateAssertions.cs" />
     <ProjectReference Include="..\CSharpMath.Avalonia\CSharpMath.Avalonia.csproj" />
     <ProjectReference Include="..\CSharpMath.SkiaSharp\CSharpMath.SkiaSharp.csproj" />
-    <PackageReference Include="Avalonia.Skia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Skia" Version="0.10.18" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="coverlet.collector" Version="3.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="GitHubActionsTestLogger" Version="2.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="xunit" Version="2.4.2" />
+    <PackageReference Update="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

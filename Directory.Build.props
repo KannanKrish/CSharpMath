@@ -1,99 +1,99 @@
 ﻿<!--Directory.Build.props: MSBuild properties that are included in every project-->
 <!--Info: https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019#directorybuildprops-and-directorybuildtargets-->
 <Project InitialTargets="SetDefaultPackageVersion">
-  <PropertyGroup Condition="$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Ios'))">
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup Condition="$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Visualizer'))">
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
-    <PackageReference Include="coverlet.collector" Version="1.3.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
-    <PackageReference Include="GitHubActionsTestLogger" Version="1.1.0" />
-  </ItemGroup>
-  <!--Don't apply to Typography projects-->
-  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('CSharpMath'))">
-    <!--CSharpMath-specific properties for centralized control of values-->
-    <AvaloniaVersion>0.10.0</AvaloniaVersion>
+	<PropertyGroup Condition="$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Ios'))">
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup Condition="$(MSBuildProjectName.Contains('Test')) And !$(MSBuildProjectName.Contains('Visualizer'))">
+		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
+		<PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
+		<PackageReference Include="coverlet.collector" Version="3.2.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
+		<PackageReference Include="GitHubActionsTestLogger" Version="2.0.1" />
+	</ItemGroup>
+	<!--Don't apply to Typography projects-->
+	<PropertyGroup Condition="$(MSBuildProjectName.StartsWith('CSharpMath'))">
+		<!--CSharpMath-specific properties for centralized control of values-->
+		<AvaloniaVersion>0.10.0</AvaloniaVersion>
 
-    <!--C# code properties-->
-    <LangVersion>preview</LangVersion>
-    <Nullable>enable</Nullable>
-    <NoWarn>
-      CA1062,<!--Obsolete with C# 8 nullability annotations-->
-      CA1303,<!--Who localizes exception messages, anyway?-->
-    </NoWarn>
-    <WarningsAsErrors Condition="$(MSBuildProjectExtension) == '.csproj'">nullable</WarningsAsErrors>
+		<!--C# code properties-->
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<NoWarn>
+			CA1062,<!--Obsolete with C# 8 nullability annotations-->
+			CA1303,<!--Who localizes exception messages, anyway?-->
+		</NoWarn>
+		<WarningsAsErrors Condition="$(MSBuildProjectExtension) == '.csproj'">nullable</WarningsAsErrors>
 
-    <!--NuGet properties: Ordered according to https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target-->
-    <PackageId>$(MSBuildProjectName)</PackageId>
-    <!--PackageVersion is set in the SetDefaultPackageVersion target below-->
-    <Authors>CSharpMath Contributors (verybadcat, Happypig375, charlesroddie, FoggyFinder)</Authors>
-    <Title>$(PackageId)</Title>
-    <!--Description property is defined in individual projects-->
-    <Copyright>© CSharpMath Contributors 2020</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/verybadcat/CSharpMath</PackageProjectUrl>
-    <PackageIcon>Icon.png</PackageIcon>
-    <PackageTags>
-      math mathematics mathematical formula equation equations
-      expression tex latex render rendering display beautiful CSharpMath
-    </PackageTags>
-    <!--PackageReleaseNotes is not set by default and is set by CI-->
-    <RepositoryUrl>https://github.com/verybadcat/CSharpMath.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryBranch>master</RepositoryBranch>
-    <!--RepositoryCommit property is set in the SetDefaultPackageVersion target below-->
+		<!--NuGet properties: Ordered according to https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target-->
+		<PackageId>$(MSBuildProjectName)</PackageId>
+		<!--PackageVersion is set in the SetDefaultPackageVersion target below-->
+		<Authors>CSharpMath Contributors (verybadcat, Happypig375, charlesroddie, FoggyFinder)</Authors>
+		<Title>$(PackageId)</Title>
+		<!--Description property is defined in individual projects-->
+		<Copyright>© CSharpMath Contributors 2020</Copyright>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/verybadcat/CSharpMath</PackageProjectUrl>
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageTags>
+			math mathematics mathematical formula equation equations
+			expression tex latex render rendering display beautiful CSharpMath
+		</PackageTags>
+		<!--PackageReleaseNotes is not set by default and is set by CI-->
+		<RepositoryUrl>https://github.com/verybadcat/CSharpMath.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryBranch>master</RepositoryBranch>
+		<!--RepositoryCommit property is set in the SetDefaultPackageVersion target below-->
 
-    <!--SourceLink properties: Ordered according to https://github.com/dotnet/sourcelink#using-source-link-in-net-projects-->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<!--SourceLink properties: Ordered according to https://github.com/dotnet/sourcelink#using-source-link-in-net-projects-->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <!--Info on NuGet packaging properties: https://github.com/NuGet/Home/wiki/Adding-nuget-pack-as-a-msbuild-target-->
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <GeneratePackageOnBuild Condition="
-      !$(MSBuildProjectName.Contains('Test'))
-      And !$(MSBuildProjectName.Contains('Benchmark'))
-      And !$(MSBuildProjectName.Contains('Example'))
-      And !$(MSBuildProjectName.Contains('Playground'))
-      And $(Configuration.Equals('Release'))">true</GeneratePackageOnBuild>
-    <PackageOutputPath>$(MSBuildThisFileDirectory).nupkgs</PackageOutputPath>
+		<!--Info on NuGet packaging properties: https://github.com/NuGet/Home/wiki/Adding-nuget-pack-as-a-msbuild-target-->
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild Condition="
+	  !$(MSBuildProjectName.Contains('Test'))
+	  And !$(MSBuildProjectName.Contains('Benchmark'))
+	  And !$(MSBuildProjectName.Contains('Example'))
+	  And !$(MSBuildProjectName.Contains('Playground'))
+	  And $(Configuration.Equals('Release'))">true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(MSBuildThisFileDirectory).nupkgs</PackageOutputPath>
 
-    <!--https://github.com/clairernovotny/DeterministicBuilds
-        Deterministic builds are important as they enable verification that the resulting binary was built from the specified source and provides traceability.
-        It should not be enabled during local dev or the debugger won't be able to find the local source files.
-        Also, this requires SourceLink to be enabled or else error: https://github.com/dotnet/sourcelink/issues/91#issuecomment-400787926-->
-    <!--But this only works well with dotnet msbuild, not the Windows full MSBuild-->
-    <ContinuousIntegrationBuild Condition="'$(MSBuildRuntimeType)'=='Core'">$(GeneratePackageOnBuild)</ContinuousIntegrationBuild>
+		<!--https://github.com/clairernovotny/DeterministicBuilds
+		Deterministic builds are important as they enable verification that the resulting binary was built from the specified source and provides traceability.
+		It should not be enabled during local dev or the debugger won't be able to find the local source files.
+		Also, this requires SourceLink to be enabled or else error: https://github.com/dotnet/sourcelink/issues/91#issuecomment-400787926-->
+		<!--But this only works well with dotnet msbuild, not the Windows full MSBuild-->
+		<ContinuousIntegrationBuild Condition="'$(MSBuildRuntimeType)'=='Core'">$(GeneratePackageOnBuild)</ContinuousIntegrationBuild>
 
-    <!--Assembly properties-->
-    <NeutralLanguage>en</NeutralLanguage>
-    <!--Prefix namespace for embedded resources-->
-    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
-    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-  </PropertyGroup>
-  <!--SourceLink does not work well with WPF projects so we don't add it unconditionally-->
-  <ItemGroup Condition="$(MSBuildProjectName.StartsWith('CSharpMath')) And $(GeneratePackageOnBuild)">
-    <None Include="$(MSBuildThisFileDirectory)Icon.png" Pack="true" PackagePath="" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
-  <!--Also run for non-CSharpMath projects: Normalize PackageVersion or else error-->
-  <Target Name="SetDefaultPackageVersion">
-    <!--Setting StandardOutputImportance to Low ensures that EchoOff works: https://github.com/Microsoft/msbuild/issues/2826-->
-    <Exec Command="git rev-parse HEAD" ConsoleToMSBuild="true" EchoOff="true" StandardOutputImportance="Low">
-      <Output TaskParameter="ConsoleOutput" PropertyName="RepositoryCommit" />
-    </Exec>
-    <!--For local builds-->
-    <CreateProperty Condition="$(PackageVersion) == '1.0.0'" Value="2147483647.2147483647.2147483647-localbuild-$(RepositoryCommit)">
-      <Output TaskParameter="Value" PropertyName="PackageVersion" />
-    </CreateProperty>
-    <!--For CI builds-->
-    <CreateProperty Value="$(PackageVersion.TrimStart('v'))">
-      <Output TaskParameter="Value" PropertyName="PackageVersion" />
-    </CreateProperty>
-  </Target>
+		<!--Assembly properties-->
+		<NeutralLanguage>en</NeutralLanguage>
+		<!--Prefix namespace for embedded resources-->
+		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+	</PropertyGroup>
+	<!--SourceLink does not work well with WPF projects so we don't add it unconditionally-->
+	<ItemGroup Condition="$(MSBuildProjectName.StartsWith('CSharpMath')) And $(GeneratePackageOnBuild)">
+		<None Include="$(MSBuildThisFileDirectory)Icon.png" Pack="true" PackagePath="" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
+	<!--Also run for non-CSharpMath projects: Normalize PackageVersion or else error-->
+	<Target Name="SetDefaultPackageVersion">
+		<!--Setting StandardOutputImportance to Low ensures that EchoOff works: https://github.com/Microsoft/msbuild/issues/2826-->
+		<Exec Command="git rev-parse HEAD" ConsoleToMSBuild="true" EchoOff="true" StandardOutputImportance="Low">
+			<Output TaskParameter="ConsoleOutput" PropertyName="RepositoryCommit" />
+		</Exec>
+		<!--For local builds-->
+		<CreateProperty Condition="$(PackageVersion) == '1.0.0'" Value="2147483647.2147483647.2147483647-localbuild-$(RepositoryCommit)">
+			<Output TaskParameter="Value" PropertyName="PackageVersion" />
+		</CreateProperty>
+		<!--For CI builds-->
+		<CreateProperty Value="$(PackageVersion.TrimStart('v'))">
+			<Output TaskParameter="Value" PropertyName="PackageVersion" />
+		</CreateProperty>
+	</Target>
 </Project>

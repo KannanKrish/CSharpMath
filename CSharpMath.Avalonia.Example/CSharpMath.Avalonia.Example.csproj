@@ -9,8 +9,8 @@
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
     <AvaloniaResource Include="**\*.xaml" />
     <EmbeddedResource Include="..\Icon.png" Link="Icon.png" />
-    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.18" />
     <ProjectReference Include="..\CSharpMath.Avalonia\CSharpMath.Avalonia.csproj" />
     <ProjectReference Include="..\CSharpMath.Evaluation\CSharpMath.Evaluation.csproj" />
   </ItemGroup>

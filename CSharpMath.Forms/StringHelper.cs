@@ -13,4 +13,3 @@ namespace CSharpMath.Forms {
       text.Split(new[] { substring }, StringSplitOptions.None).Length - 1;
   }
 }
-

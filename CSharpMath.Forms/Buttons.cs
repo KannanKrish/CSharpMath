@@ -1,20 +1,26 @@
+using System;
+using CSharpMath.SkiaSharp;
 using SkiaSharp;
 using Xamarin.Forms;
+
 namespace CSharpMath.Forms {
-  using System;
-  using SkiaSharp;
-  public interface IButtonDraw { void ButtonDraw(); }
+  public interface IButtonDraw {
+    void ButtonDraw();
+  }
+
   [ContentProperty(nameof(Content))]
   public abstract class BaseButton<TView, TPainter, TContent> : ImageButton, IButtonDraw
     where TView : BaseView<TPainter, TContent>
     where TPainter : Rendering.FrontEnd.Painter<SKCanvas, TContent, SKColor>, new()
     where TContent : class {
     private readonly object lockObj = new object();
+
     public BaseButton() {
       Aspect = DefaultButtonStyle.AspectFit;
       BackgroundColor = DefaultButtonStyle.TransparentBackground;
       ButtonDraw();
     }
+
     public virtual void ButtonDraw() => Source = ImageSource.FromStream(() => {
       if (Content is { } c) {
         lock (lockObj) {
@@ -37,18 +43,34 @@ namespace CSharpMath.Forms {
           return stream;
         }
       }
+
       return null;
     });
+
     public Color TextColor { get => (Color)GetValue(TextColorProperty); set => SetValue(TextColorProperty, value); }
-    public static readonly BindableProperty TextColorProperty = BindablePropertyWithButtonDraw<BaseButton<TView, TPainter, TContent>>(nameof(TextColor), typeof(Color), Color.Black);
+
+    public static readonly BindableProperty TextColorProperty =
+      BindablePropertyWithButtonDraw<BaseButton<TView, TPainter, TContent>>(nameof(TextColor), typeof(Color),
+        Color.Black);
+
     public TView? Content { get => (TView?)GetValue(ContentProperty); set => SetValue(ContentProperty, value); }
-    public static readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(TView), typeof(BaseButton<TView, TPainter, TContent>));
-    protected static BindableProperty BindablePropertyWithButtonDraw<TButton>(string propertyName, Type propertyType, object? defaultValue = null) where TButton : IButtonDraw =>
-      BindableProperty.Create(propertyName, propertyType, typeof(TButton), defaultValue: defaultValue, propertyChanged: (b, o, n) => ((IButtonDraw)b).ButtonDraw());
+
+    public static readonly BindableProperty ContentProperty =
+      BindableProperty.Create(nameof(Content), typeof(TView), typeof(BaseButton<TView, TPainter, TContent>));
+
+    protected static BindableProperty BindablePropertyWithButtonDraw<TButton>(string propertyName, Type propertyType,
+      object? defaultValue = null) where TButton : IButtonDraw =>
+      BindableProperty.Create(propertyName, propertyType, typeof(TButton), defaultValue: defaultValue,
+        propertyChanged: (b, o, n) => ((IButtonDraw)b).ButtonDraw());
   }
-  public class MathButton : BaseButton<MathView, MathPainter, Atom.MathList> { }
-  public class TextButton : BaseButton<TextView, TextPainter, Rendering.Text.TextAtom> { }
+
+  public class MathButton : BaseButton<MathView, MathPainter, Atom.MathList> {
+  }
+
+  public class TextButton : BaseButton<TextView, TextPainter, Rendering.Text.TextAtom> {
+  }
 }
+
 internal class DefaultButtonStyle {
   internal const Aspect AspectFit = Aspect.AspectFit;
   internal static readonly Color TransparentBackground = Color.Transparent;
